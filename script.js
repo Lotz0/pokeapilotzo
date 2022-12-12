@@ -10,11 +10,23 @@ const pokeStats2 = document.querySelector('[data-poke-stats-2]');
 
 const buscarPokemon = event => {
     event.preventDefault();
+    var idIngresado = document.getElementById('pokeIntro').value;
+    if(idIngresado == '', idIngresado == 0){
+        pokeName.textContent =`Ingresar un numero valido` ;
+    } else if (idIngresado < 0){
+        pokeName.textContent= `ingresar un numero mayor a 0`;
+    }
+   
+
+
+
     const {value} = event.target.pokemon;
     fetch(`https://pokeapi.co/api/v2/pokemon/${value}`)
         .then(data => data.json())
         .then(response => renderPokemonData(response))
 }
+
+
 
 const renderPokemonData = data => {
     const sprite = data.sprites.front_default;
